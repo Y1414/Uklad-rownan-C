@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "ur.h"
 
-void read (FILE* in, system_of_equations system){
+void read_a (FILE* in, system_of_equations system){
     int n, i, j;
     fscanf(in, "%d", &system->n);
     fscanf(in, "%d", &n);
@@ -19,4 +19,47 @@ void read (FILE* in, system_of_equations system){
             system->a[i][j] = number;
         }
     }
+}
+
+void read_b (FILE * in, system_of_equations system){
+    
+    int temp, i;
+
+    fscanf(in, "%d", &temp);
+    if (temp != system->n){
+        printf("Błąd!\n");
+        exit(1);
+    }
+
+    fscanf(in, "%d", &temp);
+    if (temp != 1){
+        printf("błędny wymiar macierzy b");
+        exit(1);
+    }
+
+    system->b = malloc(system->n * sizeof *(system->b));
+    
+    double number; 
+
+    for(i = 0; i < system->n; i++){
+        fscanf(in, "%lf", &number);
+        system->b[i] = number;
+    }
+
+}
+
+
+void print_system(system_of_equations system){
+    int i,j;
+    printf("\n");
+    for (i=0;i<system->n;i++){
+        for(j=0;j<system->n;j++){
+            printf("%lf ",system->a[i][j]);
+        }
+        if (system->b != NULL)
+            printf("  %lf\n", system->b[i]);
+        else
+            printf("\n");
+    }
+    printf("\n");
 }
