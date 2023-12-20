@@ -8,6 +8,7 @@ void gaussian_elimination(system_of_equations system){
     double first_row;
     double fraction;
     for (collumn=0;collumn<system->n;collumn++){
+        swap_rows(system, collumn);
         first_row = system->a[collumn][collumn];
         for(row=collumn+1;row<system->n;row++){
             fraction = (double)system->a[row][collumn]/first_row;
@@ -16,6 +17,6 @@ void gaussian_elimination(system_of_equations system){
                 system->a[row][i] = system->a[row][i] - (system->a[collumn][i] * fraction);
             }
         }
+        print_system(system);
     }
 }
-
