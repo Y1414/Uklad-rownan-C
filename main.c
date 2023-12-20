@@ -13,7 +13,11 @@ int main(int argc, char**argv){
 
     system_of_equations system = malloc(sizeof(system_of_equations));
 
+    
     read_a(in_a, system);
     read_b(in_b, system);
     print_system(system);
+    gaussian_elimination(system);
+    solver(system);
+    result(system);
 }
