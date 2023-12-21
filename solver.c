@@ -13,7 +13,13 @@ void solver(system_of_equations system){
         system->x[row] = (double)((system->b[row] - s) / system->a[row][row]);
     }
 }
+
 void result (system_of_equations system){
     for (int i = 0 ; i < system->n; i++)
         printf("x%d = %lf\n", i+1, system->x[i]);
+    free(system->b);
+    free(system->x);
+    for (int i=0;i<system->n;i++)
+        free(system->a[i]);
+    free(system->a);
 }
